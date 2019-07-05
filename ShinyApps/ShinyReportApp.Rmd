@@ -1,0 +1,366 @@
+---
+title: <span style="color:#666666">Dynamic R Report from Linear Model</span>
+author: <span style="color:#ff6600">Jordan Wheeler</span>
+runtime: shiny
+output: 
+    html_document:
+      theme: cosmo
+---
+```{r include = FALSE}
+library(car)
+library(ggplot2)
+library(MASS)
+library(DT)
+library(data.table)
+library(plotly)
+library(googleVis)
+library(shinythemes)
+library(knitr)
+library(shiny)
+
+data = data.frame(diamonds)
+head(data)
+
+full_model = lm(price~., data = data)
+summary(full_model)
+
+best_model = stepAIC(full_model, direction = "both", trace = FALSE)
+best_model_summary = summary(best_model)
+best_model_coef = best_model_summary$coefficients
+best_model_coef = as.data.frame(best_model_coef)
+
+column_names = names(best_model$coefficients[2:length(best_model$coefficients)])
+column_names = gsub("\\..*","", column_names)
+column_names = gsub("\\^.*","", column_names)
+column_names = unique(column_names)
+
+data2 = data[,(colnames(data) %in% column_names)]
+
+row_names = rownames(best_model_coef)
+row_names = gsub("\\..*","", row_names)
+row_names = gsub("\\^.*","", row_names)
+best_model_coef = data.frame(variables = row_names, best_model_coef)
+best_model_coef = best_model_coef[,1:2]
+
+best_model_coef = data.table(best_model_coef)
+DoTDF = best_model_coef[, .(Estimate = sum(Estimate)), by = list(variables)]
+best_model_coef = data.frame(DoTDF)
+
+factor_vars = names(grep("factor", sapply(data2, class), value=TRUE))
+best_model_coef[which(best_model_coef$variables %in% factor_vars),]$Estimate = best_model_coef[which(best_model_coef$variables %in% factor_vars),]$Estimate + best_model_coef[1,]$Estimate
+best_model_coef = best_model_coef[-c(1),]
+
+numdata = data2[sapply(data2, is.numeric)] 
+column_means = colMeans(numdata)
+column_means = as.data.frame(column_means)
+row_names2 = rownames(column_means)
+column_means = data.frame(variables = row_names2, column_means)
+column_means
+
+factor_vars_df = best_model_coef[which(best_model_coef$variables %in% factor_vars),]
+factor_vars_df$column_means = 1
+
+numeric_vars_df = merge(x = best_model_coef, y = column_means, by = "variables")
+best_model_coef = rbind(factor_vars_df, numeric_vars_df)
+
+best_model_coef$contributions = best_model_coef$Estimate * best_model_coef$column_means
+best_model_coef$contribution_percent = abs(best_model_coef$contributions)/sum(abs(best_model_coef$contributions))
+
+best_model_coef = best_model_coef[order(best_model_coef$contribution_percent, decreasing = TRUE),]
+
+graph_text = paste("Variable: ", best_model_coef$variables, "\n", "Contribution: ", scales::percent(best_model_coef$contribution_percent))
+```
+
+## Automated Reports {style="color:#666666"}
+
+Select a tab to see the specified report.
+
+## {.tabset}
+### Model Variables
+
+<h4 style="text-align:center">Summary of Significant Variables:</h4> 
+<h5 style="text-align:center">Connected to a database and created a model to determine the Price of a diamond based upon diamond attributes.</h5> 
+<h5 style="text-align:center">Here is the result of the best model</h5>
+<hr style="border-color: #ff6600;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+kable(as.data.frame(best_model_summary$coefficients))
+```
+
+### Model Statistics
+
+<h4 style="text-align:center">Summary of Model:</h4> 
+<h5 style="text-align:center">Statistical Results of the Model</h5> 
+<hr style="border-color: #ff6600;">
+
+<div align="center">
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+tags$h3("R-squared Value:", tags$b(textOutput("r_sq")))
+tags$h3("Adjusted R-squared Value:", tags$b(textOutput("adj_r_sq")))
+tags$h3("Degrees of Freedom:", tags$b(textOutput("deg_free")))
+tags$h3("F-Statistic:", tags$b(textOutput("f_stat")))
+tags$h3("Model (without coefficients):", tags$b(textOutput("model_call")))
+
+output$r_sq = function() { paste(best_model_summary$r.squared) }
+output$adj_r_sq = function() { paste(best_model_summary$adj.r.squared) }
+output$deg_free = function() { paste(best_model_summary$df[2]) }
+output$f_stat = function() { paste(best_model_summary$fstatistic[1]) }
+output$model_call = function() { paste(best_model_summary$call) }
+```
+</div>
+<br>
+<br>
+
+### Contributions by Variables
+
+<h4 style="text-align:center">Contributions by Significant Variables:</h4>
+<h5 style="text-align:center">Here is a graph of all the variables that contribute to the best model</h5>
+<hr style="border-color: #ff6600;">
+<br>
+<br>
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+contribution_graph = ggplot(mapping = aes(x = reorder(best_model_coef$variables, -best_model_coef$contribution_percent), y = best_model_coef$contribution_percent)) +
+  geom_bar(stat="identity", color = "white", fill = "steelblue") +
+  geom_text(aes(label=scales::percent(best_model_coef$contribution_percent)), vjust=-.5, color="#666666") +
+  scale_x_discrete("Variable") + 
+  scale_y_continuous("Total Contribution", limits = c(0, (max(best_model_coef$contribution_percent)+.1)), expand = c(0,0)) + 
+  ggtitle("Contribution of Variables") +
+  theme_minimal() +
+  theme(plot.title = element_text(color="#666666", face="bold", size=24)) +
+  theme(axis.title = element_text(color="#666666", face="bold", size=16, margin= margin(t=1, r=1, b=1, l=1))) +
+  theme(axis.text = element_text(color="#666666", size=10)) +
+  theme(plot.title = element_text(hjust = .5)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+contribution_graph
+
+```
+
+### Independent Variable Relationship
+
+<h4 style="text-align:center">Independent Variables vs. Target Variable:</h4> 
+<h5 style="text-align:center">Here is a graph of a linear model that shows the relationship between the target variable and the selected variable. This will show you how the selected variable influences the target variable.</h5>
+<hr style="border-color: #ff6600;">
+
+<div align="center">
+```{r echo = FALSE, warning = FALSE, fig.align = 'center', fig.width= 10}
+inputPanel(
+  selectInput("IndVar", "Select Independent Variable:",
+              choices = sub("_", " ", best_model_coef$variables)))
+renderPlotly({
+  IndependentVar = sub(" ", "_", input$IndVar)
+  print( 
+  ggplotly(ggplotly(ggplot(data, aes(x = data[,IndependentVar], y = price)) + 
+        geom_point() +
+        stat_smooth(method = "lm", col = "blue") +
+        ggtitle("Independent Variable vs.Target Variable\n") +
+        labs(x = sub("_", " ", IndependentVar), y = "Price") +
+        theme_minimal() +
+        theme(plot.title = element_text(color="#666666", face="bold", size=24)) +
+        theme(axis.title = element_text(color="#666666", face="bold", size=16, margin= margin(t=1, r=1, b=1, l=1))) +
+        theme(axis.text = element_text(color="#666666", size=12)) +
+        theme(plot.title = element_text(hjust = .5)))))
+})
+```
+</div>
+
+### Variable Breakdown
+
+<h4 style="text-align:center">Variable Breakdown:</h4> 
+<h5 style="text-align:center">Select a variable to see a box-plot that will show you specifics of that variable.</h5>
+<hr style="border-color: #ff6600;">
+
+<div align="center">
+```{r echo = FALSE, warning = FALSE, fig.align = 'center', fig.width= 10}
+inputPanel(
+  selectInput("IndVar2", "Select Independent Variable:",
+              choices = sub("_", " ", best_model_coef$variables)))
+
+renderPlotly(plot_ly(y = data2[,sub(" ", "_", input$IndVar2)],
+                     name = input$IndVar2,
+                     type = "box") %>%
+               layout(height = 750)
+               )
+
+
+  
+```
+</div>
+
+### View Data
+
+<h4 style="text-align:center">View Data Table:</h4> 
+<hr style="border-color: #ff6600;">
+
+<div align="center">
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+library(kableExtra)
+
+inputPanel(
+  fluidRow(tags$h4("Min Row:", textOutput("min_row")),textInput("start", "Start Row Number:", "1")),
+  fluidRow("", column(12, style = "margin-top: 85px;", downloadButton("DLdata", "Download Current Table"))),
+  fluidRow(tags$h4("Max Row:", textOutput("max_row")), textInput("end", "End Row Number:", "5"))
+)
+
+output$max_row = function() { paste(nrow(data)) }
+output$min_row = function() { paste(nrow(data)-(nrow(data)-1)) }
+
+htmlOutput("tabl")
+output$tabl = renderGvis({
+  h = ((as.numeric(input$end) - as.numeric(input$start)) + 2) * 30
+  if (h > 500){
+    h = paste(500, "px", sep = "")
+  }
+  else{
+    h = paste(h, "px", sep = "")
+  }
+  gvisTable(data[as.numeric(input$start):as.numeric(input[["end"]]),], options = list(page = "enable", pageSize = 25))
+})
+
+output$DLdata = downloadHandler(
+    filename = function() {
+      paste("DataSet", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv((data[as.numeric(input$start):as.numeric(input[["end"]]),]), file, row.names = FALSE)
+    }
+  )
+```
+</div>
+
+### Search Table
+
+<h4 style="text-align:center">Search for an Entry:</h4> 
+<hr style="border-color: #ff6600;">
+
+<div align="center">
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+
+tags$div(style = "width: 90%;",
+inputPanel(
+  fluidRow(column(12, style = "margin-top: 5px;",
+              selectInput("searchVar", "Select Independent Variable to Search By:",
+              choices = best_model_coef$variables)),
+           downloadButton("DLdata2", "Download Current Table")),
+  fluidRow(tags$h4("Variable Range:"), tags$h5(textOutput("variable_range")),
+           column(12, style = "margin-top: 5px;",
+           textInput("searchVal", "Enter a Value to Filter:", "4"))),
+  tags$div(align = "left",
+           radioButtons("radio", label = h3("Choose Filter:"),
+              choices = list("Less Than or Equal" = 1, "Equal" = 2, "Greater Than or Equal" = 3), 
+              selected = 2)),
+  fluidRow(tags$hr(), tags$div(align = "center", tags$h3("Number of Rows Slected:"), tags$hr(), tags$h4(tags$b(textOutput("numrows"))))))
+)
+  
+  output$variable_range = function(){
+    paste(min(data[,input$searchVar]), "-", max(data[,input$searchVar]))
+  }
+
+htmlOutput("tabl2")
+output$tabl2 = renderGvis({
+    if (input$radio == 1){
+      gvisTable(data[data[,input$searchVar] <= as.numeric(input$searchVal),], options = list(page = "enable", pageSize = 25))
+    }
+    else if (input$radio == 2){
+      gvisTable(data[data[,input$searchVar] == as.numeric(input$searchVal),], options = list(page = "enable", pageSize = 25))
+    }
+    else if (input$radio == 3){
+      gvisTable(data[data[,input$searchVar] >= as.numeric(input$searchVal),], options = list(page = "enable", pageSize = 25))
+    }
+})
+  
+output$DLdata2 = downloadHandler(
+    filename = function() {
+      paste("DataSet", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv({if (input$radio == 1){data[data[,input$searchVar] <= as.numeric(input$searchVal),]}
+    else if (input$radio == 2){data[data[,input$searchVar] == as.numeric(input$searchVal),]}
+    else if (input$radio == 3){data[data[,input$searchVar] >= as.numeric(input$searchVal),]}}, file, row.names = FALSE)
+    }
+  )
+
+output$numrows = function() {
+    if (input$radio == 1){
+      nrow(data[data[,input$searchVar] <= as.numeric(input$searchVal),])
+    }
+    else if (input$radio == 2){
+      nrow(data[data[,input$searchVar] == as.numeric(input$searchVal),])
+    }
+    else if (input$radio == 3){
+      nrow(data[data[,input$searchVar] >= as.numeric(input$searchVal),])
+    }
+  }
+
+# tableOutput("tabl2")
+# output$tabl2 = function(){
+#     if (input$radio == 1){
+#       kable(DoTDF[DoTDF[,input$searchVar] <= as.numeric(input$searchVal),], "html") %>%
+#         scroll_box(height = "500px", width = "910px")
+#     }
+#     else if (input$radio == 2){
+#       kable(DoTDF[DoTDF[,input$searchVar] == as.numeric(input$searchVal),], "html") %>%
+#         scroll_box(height = "500px", width = "910px")
+#     }
+#     else if (input$radio == 3){
+#       kable(DoTDF[DoTDF[,input$searchVar] >= as.numeric(input$searchVal),], "html") %>%
+#         scroll_box(height = "500px", width = "910px")
+#     }
+# }
+```
+</div>
+
+### Predictions
+
+<h4 style="text-align:center">Make a Prediction:</h4> 
+<h5 style="text-align:center">Input values for the independent variables to get a predicted output.</h5>
+<hr style="border-color: #ff6600;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+
+sidebarPanel(
+  lapply(as.character(best_model_coef$variables), function(i) {
+    textInput(inputId = i, label = paste(i, ":"), as.character(min(data[[i]])))}))
+
+mainPanel(tags$div(align="center",
+  tags$hr(),
+  tags$h1(renderText("Predicted Price:")),
+  tags$hr(),
+  tags$h1(renderText({ 
+    input_df = data.frame(matrix(ncol = 0, nrow = 1))
+    for (i in as.character(best_model_coef$variables)){
+      if ("factor" %in% class(data[[i]])){
+        input_df[[i]] = as.character(input[[i]])}
+      else {
+        input_df[[i]] = as.numeric(input[[i]])
+      }
+    }
+    scales::dollar(predict(best_model, input_df))
+  })),
+  tags$hr(style="border-color: #ff6600;"),
+  renderPlotly({
+    input_df = data.frame(matrix(ncol = 0, nrow = 1))
+    for (i in as.character(best_model_coef$variables)){
+      if ("factor" %in% class(data[[i]])){
+        input_df[[i]] = as.character(input[[i]])}
+      else {
+        input_df[[i]] = as.numeric(input[[i]])
+      }
+    }
+    Predicted_Price = predict(best_model, input_df)
+    print(
+      ggplotly(ggplot(data, aes(x = price)) +
+                 geom_histogram(color = "steelblue", fill = "steelblue", alpha = .5, bins = 50) +
+                 geom_vline(aes(xintercept = Predicted_Price), color = "#ff6600", linetype = "dashed", size = 1) +
+                 scale_x_continuous("Price", labels = scales::dollar_format(), breaks = scales::pretty_breaks(n=10)) +
+                 scale_y_continuous("Count") +
+                 ggtitle("Diamond Price Density Curve") +
+                 theme_minimal() +
+                 theme(plot.title = element_text(color="#666666", face="bold", size=24)) +
+                 theme(axis.title = element_text(color="#666666", face="bold", size=16, margin= margin(t=1, r=1, b=1, l=1))) +
+                 theme(axis.text = element_text(color="#666666", size=10)) +
+                 theme(plot.title = element_text(hjust = .5)) +
+                 theme(axis.text.x = element_text(angle = 45, hjust = 1))
+      ))})
+  ))
+```

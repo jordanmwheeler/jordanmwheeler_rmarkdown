@@ -1,0 +1,379 @@
+---
+title: <span style="color:#666666">Pace Calculator</span>
+author: <span style="color:steelblue">Jordan Wheeler</span>
+runtime: shiny
+output: 
+    html_document:
+      theme: cosmo
+---
+```{r include = FALSE}
+library(stringr)
+library(kableExtra)
+```
+<hr style="border-color: orange;">
+
+## Running and Pace Calculators {style="color:#666666"}
+
+Select a tab to use a specific calculator.
+
+## {.tabset}
+### Calculate Total Time
+
+<h4 style="text-align:center">Calculate Total Time:<h4> 
+<h5 style="text-align:center">Enter a distance and a pace to receive a total time.</h5>
+<h5 style="text-align:center">The format of the output is HH:MM:SS.MS</h5>
+<h5 style="text-align:center">where H is Hour, M is minute, S is second, and MS is milliseconds</h5>
+<hr style="border-color: orange;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+
+fluidRow(
+  {column(6, align = "center",
+          tags$h3("Distance Specifics:"),
+          selectInput("event", h4("Event:"),
+              choices = c("Pick an Event", "1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters", 
+                            "Half-Marathon", "Marathon", "Enter Manual Distance")),
+          textInput("dist", h4("Distance:")),
+          selectInput("dist.met", h4("Distance Metric"),
+              choices = c("Meter(s)" = 1, "Mile(s)" = 2, "Kilometer(s)" = 3), selected = 1))},
+  {column(6, align = "center",
+          tags$h3("Pace Specifics:"),
+          {column(6, align = "center",
+              textInput("hours", h4("Hour(s):"), width ="50%", value = "0"),
+              textInput("minutes", h4("Minute(s):"), width ="50%", value = "0"),
+              textInput("seconds", h4("Second(s):"), width ="50%", value = "0"))},
+          {column(6, style = "margin-top: 20%;",  align = "center",
+              radioButtons("pace.met", h4("Select Pace Metric:"), choices = c("Miles" = 1, "Kilometers" = 2), selected = 1))})})
+
+observe({
+      event = c("1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters", 
+                "Half-Marathon", "Marathon", "Enter Manual Distance")
+      distance = c(1500,3000,5000,8000,10000,13.1094,26.2188,0)
+      metric = c("Meters", "Meters", "Meters", "Meters", "Meters", "Miles", "Miles", "Meters")
+      radio.metric = c("Meter(s)", "Meter(s)", "Meter(s)", "Meter(s)", "Meter(s)", "Mile(s)", "Mile(s)", "Meter(s)")
+      distance.dict = data.frame(event, distance, metric, radio.metric)
+      distance.dict$metric = as.character(distance.dict$metric)
+      
+      # This will change the value of input$inText, based on x
+      updateTextInput(session, "dist", value = as.numeric(distance.dict[distance.dict$event == input$event,]["distance"]))
+      updateSelectInput(session, "dist.met", selected = distance.dict[distance.dict$event == input$event,]["radio.metric"])
+      # Can also set the label, this time for input$inText2
+    })
+
+hr(style="border-color: orange;")
+
+tags$h1(tags$b("Total Time:"), style="text-align:center")
+tags$h1(renderText({
+  if (input$dist.met == 1){
+    if (input$pace.met == 1){
+      minute.time = ((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60)) * (as.numeric(input$dist)/1609.344)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+    else if (input$pace.met ==2){
+      minute.time = (((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60)) / 1000) * as.numeric(input$dist)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+  }
+  else if (input$dist.met == 2){
+    if (input$pace.met == 1){
+      minute.time = ((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60)) * as.numeric(input$dist)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+    else if (input$pace.met ==2){
+      minute.time = (((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60)) / 1000) * (as.numeric(input$dist)*1609.344)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+  }
+  else if (input$dist.met == 3){
+    if (input$pace.met == 1){
+      minute.time = (((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60))) * (as.numeric(input$dist)/1.609344)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+    else if (input$pace.met ==2){
+      minute.time = ((as.numeric(input$hours)*60) + as.numeric(input$minutes) + (as.numeric(input$seconds)/60)) * as.numeric(input$dist)
+      paste0(str_pad(minute.time%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time%%60)%%trunc(minute.time%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+    }
+  }
+}), style="text-align:center")
+
+
+```
+<hr style="border-color: orange;">
+
+### Calculate Pace
+
+<h4 style="text-align:center">Calculate Pace:</h4>
+<h5 style="text-align:center">Enter a distance and a total time to determine pace.</h5>
+<h5 style="text-align:center">The format of the output is HH:MM:SS.MS</h5>
+<h5 style="text-align:center">where H is Hour, M is minute, S is second, and MS is milliseconds</h5>
+<hr style="border-color: orange;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+
+fluidRow(
+  {column(6, align = "center",
+          tags$h3("Distance Specifics:"),
+          selectInput("event2", h4("Event:"),
+              choices = c("Pick an Event", "1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters", 
+                            "Half-Marathon", "Marathon", "Enter Manual Distance")),
+          textInput("dist2", h4("Distance:")),
+          selectInput("dist.met2", h4("Distance Metric"),
+              choices = c("Meter(s)" = 1, "Mile(s)" = 3, "Kilometer(s)" = 2), selected = 1))},
+  {column(6, align = "center",
+          tags$h3("Total Time Specifics:"),
+              textInput("hours2", h4("Hour(s):"), width ="50%", value = "0"),
+              textInput("minutes2", h4("Minute(s):"), width ="50%", value = "0"),
+              textInput("seconds2", h4("Second(s):"), width ="50%", value = "0"))})
+
+observe({
+      event = c("1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters",
+                "Half-Marathon", "Marathon", "Enter Manual Distance")
+      distance = c(1500,3000,5000,8000,10000,13.1094,26.2188,0)
+      metric = c("Meters", "Meters", "Meters", "Meters", "Meters", "Miles", "Miles", "Meters")
+      radio.metric = c(1,1,1,1,1,3,3,1)
+      distance.dict = data.frame(event, distance, metric, radio.metric)
+      distance.dict$metric = as.character(distance.dict$metric)
+
+      # This will change the value of input$inText, based on x
+      updateTextInput(session, "dist2", value = as.numeric(distance.dict[distance.dict$event == input$event2,]["distance"]))
+
+      # Can also set the label, this time for input$inText2
+      updateSelectInput(session, "dist.met2", selected = distance.dict[distance.dict$event == input$event2,]["radio.metric"])
+    })
+hr(style="border-color: orange;")
+
+
+tags$h1(tags$b("Pace Per Mile:"), style="text-align:center")
+tags$h1(renderText({
+  if (input$dist.met2 == 1){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / (as.numeric(input$dist2)/1609.344)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+  else if (input$dist.met2 == 3){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / as.numeric(input$dist2)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+  else if (input$dist.met2 == 2){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / (as.numeric(input$dist2)/1.609344)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+}), style="text-align:center")
+
+tags$h1(tags$b("Pace Per Kilometer:"), style="text-align:center")
+tags$h1(renderText({
+  if (input$dist.met2 == 1){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / (as.numeric(input$dist2)/1000)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+  else if (input$dist.met2 == 3){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / (as.numeric(input$dist2)*1.609344)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+  else if (input$dist.met2 == 2){
+    minute.time2 = ((as.numeric(input$hours2)*60) + as.numeric(input$minutes2) + (as.numeric(input$seconds2)/60)) / as.numeric(input$dist2)
+      paste0(str_pad(minute.time2%/%60, 2, pad = "0"), ":", str_pad(trunc(minute.time2%%60), 2, pad = "0"), ":", str_pad(format(round(((minute.time2%%60)%%trunc(minute.time2%%60))*60, 2), nsmall = 2), 5, pad = "0"))
+  }
+}), style="text-align:center")
+
+```
+<hr style="border-color: orange;">
+
+### VO2Max Calculator
+
+<h5 style="text-align:center">Calculate VO2Max:</h4>
+<h5 style="text-align:center">Enter a distance and time to receive a VDOT number</h5>
+<h5 style="text-align:center">Can use the VDOT number to determine times for other races</h5>
+<hr style="border-color: orange;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+fluidRow(
+  {column(6, align = "center",
+          tags$h3("Distance Specifics:"),
+          selectInput("event3", h4("Event:"),
+              choices = c("Pick an Event", "1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters", 
+                            "Half-Marathon", "Marathon", "Enter Manual Distance")),
+          textInput("dist3", h4("Distance:")),
+          selectInput("dist.met3", h4("Distance Metric"),
+              choices = c("Meter(s)" = 1, "Mile(s)" = 3, "Kilometer(s)" = 2), selected = 1))},
+  {column(6, align = "center",
+          tags$h3("Total Time Specifics:"),
+              textInput("hours3", h4("Hour(s):"), width ="50%", value = "0"),
+              textInput("minutes3", h4("Minute(s):"), width ="50%", value = "0"),
+              textInput("seconds3", h4("Second(s):"), width ="50%", value = "0"))})
+
+observe({
+      event = c("1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters",
+                "Half-Marathon", "Marathon", "Enter Manual Distance")
+      distance = c(1500,3000,5000,8000,10000,13.1094,26.2188,0)
+      metric = c("Meters", "Meters", "Meters", "Meters", "Meters", "Miles", "Miles", "Meters")
+      radio.metric = c(1,1,1,1,1,3,3,1)
+      distance.dict = data.frame(event, distance, metric, radio.metric)
+      distance.dict$metric = as.character(distance.dict$metric)
+
+      # This will change the value of input$inText, based on x
+      updateTextInput(session, "dist3", value = as.numeric(distance.dict[distance.dict$event == input$event3,]["distance"]))
+
+      # Can also set the label, this time for input$inText2
+      updateSelectInput(session, "dist.met3", selected = distance.dict[distance.dict$event == input$event3,]["radio.metric"])
+    })
+hr(style="border-color: orange;")
+
+
+tags$h1(tags$b("VDOT:"), style="text-align:center")
+tags$h1(renderText({
+  if (input$dist.met3 == 1){
+    minute.time3 = ((as.numeric(input$hours3)*60) + as.numeric(input$minutes3) + (as.numeric(input$seconds3)/60))
+    vo2 = -4.6 + (.182258*(as.numeric(input$dist3)/minute.time3)) + (.000104*((as.numeric(input$dist3)/minute.time3)^2))
+    percent_max = .8 + (.1894393*exp(-.012778 * minute.time3)) + (.2989558*exp(-.1932605*minute.time3))
+    vo2max = (vo2/percent_max)
+    paste0(round(vo2max,2))
+  }
+  else if (input$dist.met3 == 3){
+    minute.time3 = ((as.numeric(input$hours3)*60) + as.numeric(input$minutes3) + (as.numeric(input$seconds3)/60))
+    vo2 = -4.6 + (.182258*((as.numeric(input$dist3)*1609.344)/minute.time3)) + (.000104*(((as.numeric(input$dist3)*1609.344)/minute.time3)^2))
+    percent_max = .8 + (.1894393*exp(-.012778 * minute.time3)) + (.2989558*exp(-.1932605*minute.time3))
+    vo2max = (vo2/percent_max)
+    paste0(round(vo2max,2))
+  }
+  else if (input$dist.met3 == 2){
+    minute.time3 = ((as.numeric(input$hours3)*60) + as.numeric(input$minutes3) + (as.numeric(input$seconds3)/60))
+    vo2 = -4.6 + (.182258*((as.numeric(input$dist3)*1000)/minute.time3)) + (.000104*(((as.numeric(input$dist3)*1000)/minute.time3)^2))
+    percent_max = .8 + (.1894393*exp(-.012778 * minute.time3)) + (.2989558*exp(-.1932605*minute.time3))
+    vo2max = (vo2/percent_max)
+    paste0(round(vo2max,2))
+  }
+}), style="text-align:center")
+
+```
+<hr style="border-color: orange;">
+
+### VO2Max Race Predictor
+
+<h4 style="text-align:center">Race Predictor:</h4>
+<h5 style="text-align:center">Enter a distance and a time to receive VO2Max and a table with predicted race times</h5>
+<h5 style="text-align:center">Format for times in table are HH:MM:SS.MS</h5>
+<h5 style="text-align:center">Where H is hour, M is minute, S is second, and MS is millisecond</h5>
+<hr style="border-color: orange;">
+
+```{r echo = FALSE, warning = FALSE, fig.align = 'center'}
+fluidRow(
+  {column(6, align = "center",
+          tags$h3("Distance Specifics:"),
+          selectInput("event4", h4("Event:"),
+              choices = c("Pick an Event", "1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters", 
+                            "Half-Marathon", "Marathon", "Enter Manual Distance")),
+          textInput("dist4", h4("Distance:")),
+          selectInput("dist.met4", h4("Distance Metric"),
+              choices = c("Meter(s)" = 1, "Mile(s)" = 3, "Kilometer(s)" = 2), selected = 1))},
+  {column(6, align = "center",
+          tags$h3("Total Time Specifics:"),
+              textInput("hours4", h4("Hour(s):"), width ="50%", value = "0"),
+              textInput("minutes4", h4("Minute(s):"), width ="50%", value = "0"),
+              textInput("seconds4", h4("Second(s):"), width ="50%", value = "0"))})
+
+observe({
+      event = c("1,500 Meters", "3,000 Meters", "5,000 Meters", "8,000 Meters", "10,000 Meters",
+                "Half-Marathon", "Marathon", "Enter Manual Distance")
+      distance = c(1500,3000,5000,8000,10000,13.1094,26.2188,0)
+      metric = c("Meters", "Meters", "Meters", "Meters", "Meters", "Miles", "Miles", "Meters")
+      radio.metric = c(1,1,1,1,1,3,3,1)
+      distance.dict = data.frame(event, distance, metric, radio.metric)
+      distance.dict$metric = as.character(distance.dict$metric)
+
+      # This will change the value of input$inText, based on x
+      updateTextInput(session, "dist4", value = as.numeric(distance.dict[distance.dict$event == input$event4,]["distance"]))
+
+      # Can also set the label, this time for input$inText2
+      updateSelectInput(session, "dist.met4", selected = distance.dict[distance.dict$event == input$event4,]["radio.metric"])
+    })
+hr(style="border-color: orange;")
+
+
+tags$h1(tags$b("VDOT:"), style="text-align:center")
+tags$h1(renderText({
+  if (input$dist.met4 == 1){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    vo2.2 = -4.6 + (.182258*(as.numeric(input$dist4)/minute.time4)) + (.000104*((as.numeric(input$dist4)/minute.time4)^2))
+    percent_max.2 = .8 + (.1894393*exp(-.012778 * minute.time4)) + (.2989558*exp(-.1932605*minute.time4))
+    vo2max.2 = (vo2.2/percent_max.2)
+    paste0(round(vo2max.2,2))
+  }
+  else if (input$dist.met4 == 3){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    vo2.2 = -4.6 + (.182258*((as.numeric(input$dist4)*1609.344)/minute.time4)) + (.000104*(((as.numeric(input$dist4)*1609.344)/minute.time4)^2))
+    percent_max.2 = .8 + (.1894393*exp(-.012778 * minute.time4)) + (.2989558*exp(-.1932605*minute.time4))
+    vo2max.2 = (vo2.2/percent_max.2)
+    paste0(round(vo2max.2,2))
+  }
+  else if (input$dist.met4 == 2){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    vo2.2 = -4.6 + (.182258*((as.numeric(input$dist4)*1000)/minute.time4)) + (.000104*(((as.numeric(input$dist4)*1000)/minute.time4)^2))
+    percent_max.2 = .8 + (.1894393*exp(-.012778 * minute.time4)) + (.2989558*exp(-.1932605*minute.time4))
+    vo2max.2 = (vo2.2/percent_max.2)
+    paste0(round(vo2max.2,2))
+  }
+}), style="text-align:center")
+hr(style="border-color: orange;")
+
+fluidRow({column(12, align = "center", 
+tags$h3("Race Predictor Table:"),
+tags$h4(renderTable({
+  Distances = c("800 Meters", "1,500 Meters", "1,600 Meters", "Mile", "3,000 Meters", "3,200 Meters", "2 Mile", "5,000 Meters", 
+              "6,000 Meters", "8,000 Meters", "10,000 Meters", "15,000 Meters", "10 Miles", 
+              "20,000 Meters", "Half-Marathon", "Marathon", "50,000 Meters")
+  sub.Distance = c(800, 1500, 1600, 1609.344, 3000, 3200, 3218.688, 5000, 6000, 
+                 8000, 10000, 15000, 16093.44, 20000, 21097.5, 42195, 50000)
+  predictions = data.frame(Distances, sub.Distance)
+  
+  if (input$dist.met4 == 1){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    
+    total.time = minute.time4 * ((predictions$sub.Distance/as.numeric(input$dist4))^1.0575)
+    predictions$tottime = format(as.POSIXlt(paste0(total.time%/%60, ":", trunc(total.time%%60), ":", round(((total.time%%60)%%trunc(total.time%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    mile.pace = total.time / (predictions$sub.Distance/1609.344)
+    predictions$milepace = format(as.POSIXlt(paste0(mile.pace%/%60, ":", trunc(mile.pace%%60), ":", round(((mile.pace%%60)%%trunc(mile.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    km.pace = total.time / (predictions$sub.Distance/1000)
+    predictions$kmpace = format(as.POSIXlt(paste0(km.pace%/%60, ":", trunc(km.pace%%60), ":", round(((km.pace%%60)%%trunc(km.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    colnames(predictions) = c("Distances", "sub.Distance", "Total Time", "Mile Pace", "Kilometer Pace")
+    (predictions[,c(1,3,4,5)])
+  }
+  
+  else if (input$dist.met4 == 3){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    
+    total.time = minute.time4 * ((predictions$sub.Distance/(as.numeric(input$dist4)*1609.344))^1.0575)
+    predictions$tottime = format(as.POSIXlt(paste0(total.time%/%60, ":", trunc(total.time%%60), ":", round(((total.time%%60)%%trunc(total.time%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    mile.pace = total.time / (predictions$sub.Distance/1609.344)
+    predictions$milepace = format(as.POSIXlt(paste0(mile.pace%/%60, ":", trunc(mile.pace%%60), ":", round(((mile.pace%%60)%%trunc(mile.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    km.pace = total.time / (predictions$sub.Distance/1000)
+    predictions$kmpace = format(as.POSIXlt(paste0(km.pace%/%60, ":", trunc(km.pace%%60), ":", round(((km.pace%%60)%%trunc(km.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    colnames(predictions) = c("Distances", "sub.Distance", "Total Time", "Mile Pace", "Kilometer Pace")
+    (predictions[,c(1,3,4,5)])
+  }
+  
+  else if (input$dist.met4 == 2){
+    minute.time4 = ((as.numeric(input$hours4)*60) + as.numeric(input$minutes4) + (as.numeric(input$seconds4)/60))
+    
+    total.time = minute.time4 * ((predictions$sub.Distance/(as.numeric(input$dist4)*1000))^1.0575)
+    predictions$tottime = format(as.POSIXlt(paste0(total.time%/%60, ":", trunc(total.time%%60), ":", round(((total.time%%60)%%trunc(total.time%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    mile.pace = total.time / (predictions$sub.Distance/1609.344)
+    predictions$milepace = format(as.POSIXlt(paste0(mile.pace%/%60, ":", trunc(mile.pace%%60), ":", round(((mile.pace%%60)%%trunc(mile.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    km.pace = total.time / (predictions$sub.Distance/1000)
+    predictions$kmpace = format(as.POSIXlt(paste0(km.pace%/%60, ":", trunc(km.pace%%60), ":", round(((km.pace%%60)%%trunc(km.pace%%60))*60, 2)), format = "%H:%M:%OS"),format = "%H:%M:%OS2")
+    
+    colnames(predictions) = c("Distances", "sub.Distance", "Total Time", "Mile Pace", "Kilometer Pace")
+    (predictions[,c(1,3,4,5)])
+  }
+}, spacing = "l", align = "c"))
+)})
+
+```
+<hr style="border-color: orange;">

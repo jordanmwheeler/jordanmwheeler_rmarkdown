@@ -1,0 +1,28 @@
+---
+title: "TransNebraska Run Route"
+---
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123245200-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-123245200-1');
+</script>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d3078564.5838300986!2d-102.22740247397434!3d41.33041014512801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e2!4m3!3m2!1d42.001646199999996!2d-104.04968679999999!4m5!1s0x87938fbec72b8345%3A0x7ac7a8fab259a8df!2sBob+Kerrey+Pedestrian+Bridge.%2C+705+Riverfront+Dr%2C+Omaha%2C+NE+68102!3m2!1d41.265620299999995!2d-95.92227439999999!5e0!3m2!1sen!2sus!4v1532663360712" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<br/>
+
+<h2>The Route (Tentative)</h2>
+
+<h4><i>Aug. 11 - Henry, Ne. (Wyoming Border) to Broadwater, Ne. <b>(~73 miles)</b></i></h4>
+<h4><i>Aug. 12 - Broadwater, Ne. to Ogallala, Ne. <b>(~73 miles)</b></i></h4>
+<h4><i>Aug. 13 - Ogallala, Ne. to Brady, Ne. <b>(~73 miles)</b></i></h4>
+<h4><i>Aug. 14 - Brady, Ne. to Kearney, Ne. <b>(~73 miles)</b></i></h4>
+<h4><i>Aug. 15 - Kearney, Ne. to Hampton, Ne. <b>(~66 miles)</b></i></h4>
+<h4><i>Aug. 16 - Hampton, Ne. to Lincoln, Ne. <b>(~74 miles)</b></i></h4>
+<h4><i>Aug. 17 - Lincoln, Ne. to Bob Kerrey Pedestrian Bridge in Omaha, Ne. (Iowa Border) <b>(~55 miles)</b></i></h4>
+

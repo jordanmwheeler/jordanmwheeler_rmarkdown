@@ -1,0 +1,52 @@
+name: my-website
+author: "Jordan Wheeler"
+output_dir: '.'
+navbar:
+  title: Jordan M. Wheeler
+  left:
+  - text: Home
+    href: index.html
+  - text: Resume/CV
+    menu:
+    - text: Curriculum Vitae
+      href: cv.html
+    - text: Resume
+      href: resume.html
+    - text: Courses of Study
+      href: course_study.html
+  - text: Publications
+    menu:
+    - text: Published
+      href:
+    - text: Submitted
+      href:
+  - text: School/Work
+    menu:
+    - text: School Research/Work
+      href: work_research.html
+    - text: R Shiny Apps
+      href: shinyapp.html
+  - text: Running
+    href: running.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/jordanmwheeler
+  - icon: fa-linkedin fa-lg
+    href: https://www.linkedin.com/in/jordan-wheeler-357287138
+  - icon: fa-twitter fa-lg
+    href: https://twitter.com/jordanmwheeler?lang=en
+  - icon: fa-facebook fa-lg
+    href: https://www.facebook.com/jordanwheeler20
+  - icon: fa-instagram fa-lg
+    href: https://www.instagram.com/jordanwheeler20/
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    includes:
+      in_header: favicon.html
+      after_body: footer.html
+    lib_dir: site_libs
+    self_contained: no
+
+

@@ -1,0 +1,37 @@
+<<<<<<< HEAD
+Event,Year,Time,Place
+8000 Meters (XC),2014,_25:59.20_,32
+8000 Meters (XC),2015,_25:32.20_,1
+3000 Meters (Indoors),2016,_8:39.34_,2
+5000 Meters (Indoors),2016,_15:12.17_,1
+5000 Meters (Outdoors),2016,_15:32.03_,3
+10000 Meters (Outdoors),2016,_32:34.17_,2
+8000 Meters (XC),2016,_25:32.10_,9
+3000 Meters (Indoors),2017,_8:47.41_,8
+5000 Meters (Indoors),2017,_15:05.09_,4
+5000 Meters (Outdoors),2017,_15:24.49_,4
+10000 Meters (Outdoors),2017,_31:51.10_,4
+8000 Meters (XC),2017,_25:46.00_,9
+3000 Meters (Indoors),2018,_8:57.59_,8
+5000 Meters (Indoors),2018,_15:07.77_,4
+5000 Meters (Outdoors),2018,_15:33.22_,15
+10000 Meters (Outdoors),2018,_32:26.08_,9
+=======
+Event,Year,Time,Place
+8000 Meters (XC),2014,_25:59.20_,32
+8000 Meters (XC),2015,_25:32.20_,1
+3000 Meters (Indoors),2016,_8:39.34_,2
+5000 Meters (Indoors),2016,_15:12.17_,1
+5000 Meters (Outdoors),2016,_15:32.03_,3
+10000 Meters (Outdoors),2016,_32:34.17_,2
+8000 Meters (XC),2016,_25:32.10_,9
+3000 Meters (Indoors),2017,_8:47.41_,8
+5000 Meters (Indoors),2017,_15:05.09_,4
+5000 Meters (Outdoors),2017,_15:24.49_,4
+10000 Meters (Outdoors),2017,_31:51.10_,4
+8000 Meters (XC),2017,_25:46.00_,9
+3000 Meters (Indoors),2018,_8:57.59_,8
+5000 Meters (Indoors),2018,_15:07.77_,4
+5000 Meters (Outdoors),2018,_15:33.22_,15
+10000 Meters (Outdoors),2018,_32:26.08_,9
+>>>>>>> 67129e656398ff1a3890851d84d4d8316e34ce54

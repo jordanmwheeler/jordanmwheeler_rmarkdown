@@ -1,0 +1,33 @@
+---
+title: "TransNebraska Run Blog"
+---
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123245200-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-123245200-1');
+</script>
+
+<hr>
+
+## Posts {.tabset .tabset-fade .tabset-pills}
+
+### August 10, 2018
+<a href=""><h2>Pre-TransNebraska Run (1 Day Out)</h2></a>
+<h4><b>Date:</b> <p><i>August 10, 2018 | 06:38 PM MT</i></p></h4>
+<h4><b>Publisher:</b> <p><i>Jordan Wheeler</i></p></h4>
+<h4><b>Post:</b></h4>
+<h5>
+<p>This we be a blog containing my daily experiences from my TransNebraska Run. You can also follow my run on <a href="https://www.strava.com/athletes/30817358">my Strava account</a>.</p>
+<p>I will keep the blog posts short and simple since I will want to relax and get to bed early each night. As for some logistics about the run you can check out the <a href="route.html">TransNebraska Route</a> page. I will mainly be running on Highway 26, 30, 34 the entire way, so if I pass by a town you are in, feel free to come join for however long you would like! </p>
+<p>As for the structure of each day, I will hopefully stay pretty consistent. I plan to wake up each morning around 3-3:30 AM, and get started on the run by 3:30-4 AM. I plan to run for about 40 miles until around 10:30-11 AM. At this point, I will take a quick lunch break, charge my GPS watch and get going for the second part of the day by 11-11:30 AM. I then plan to run 20-25 miles until about 2:30-3 PM and then finish the day with a 5-10 mile walk and be finished by 5 PM. This will allow me get to bed around 7 PM each night.</p>
+<p>I will also be doing my best to post photos each day, to check those out go to the <a href="photogallery.html">TransNebraska Phots</a> page.</p>
+</h5>
+<hr>
+### August 11, 2018
+
+<hr>

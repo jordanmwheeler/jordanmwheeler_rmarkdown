@@ -1,0 +1,110 @@
+---
+title: ""
+author: "Jordan Wheeler"
+description: "Jordan Wheeler's Resume"
+---
+
+<meta name="author" content="Jordan Wheeler">
+<meta name="description" content="Jordan Wheeler's Resume">
+
+<a href="Resumes/JordanWheelerResume.pdf" target="_blank"><h1>Jordan Wheeler's Resume:</h1></a>
+
+<style>
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+
+<div id="textbox">
+<h4 class="alignleft">Resume</h4>
+<h4 class="alignright">April 25, 2019</h4>
+</div>
+
+<br/>
+<hr style="border-color: #666666;">
+
+<center>
+<h2>Jordan Wheeler</h2>
+<h4>282 Sleepy Creek Dr., Athens GA. 30606</h4>
+<h4>402-707-9177</h4> 
+<h4>jmwheeler@outlook.com</h4>
+</center>
+<hr/>
+
+<h4><strong><u>Education</u></strong><strong>:</strong></h4>
+<p><strong>University of Georgia &ndash; Athens, GA. </strong>(Anticipated: May 2023)</p>
+<ul>
+<li>Doctorate of Philosophy in Ed. Psychology</li>
+<li>Concentration: Quantitative Methodology</li>
+<li>GPA: </li>
+</ul>
+<p><strong>University of Nebraska Omaha &ndash; Omaha, NE. </strong>(May 2019)</p>
+<ul>
+<li>Master of Science in Mathematics</li>
+<li>Concentration: Statistics</li>
+<li>GPA: 3.82/4.00</li>
+</ul>
+<p><strong>Nebraska Wesleyan University &ndash; Lincoln, NE. </strong>(May 2017)</p>
+<ul>
+<li>Bachelor of Science in Mathematics</li>
+<li>Minor Equivalent in Computer Science</li>
+<li>GPA: 3.54/4.00</li>
+</ul>
+<br>
+
+<h4><strong><u>Work Experience</u></strong><strong>:</strong></h4>
+<p><strong>Data Scientist,</strong> CATCH Intelligence, January 2018 &ndash; Present</p>
+<ul>
+<li>Worked with clients across multiple industries and delivered predictive analytic projects via R, Python, and SAP</li>
+<li>Cleaned, mined, manipulated and organized data with R, Python, and SQL</li>
+<li>Generated and presented visuals and slide decks of descriptive, predictive, and prescriptive statistics</li>
+<li>Developed web applications with RShiny for reporting and dashboards</li>
+
+</ul>
+<p><strong>Mentor, </strong>Lincoln Public Schools, August 2017 &ndash; December 2017</p>
+<ul>
+<li>Created lesson plans and used multiple strategies to teach required topics</li>
+<li>Accountable for writing reports on students&rsquo; progress for administration</li>
+</ul>
+<br>
+
+<h4><strong><u>Research Experience:</u></strong></h4>
+<strong>Track Conversion Analysis, </strong>Nebraska Wesleyan University, April 2018 &ndash; September 2018</p>
+<ul>
+<li> Web scraped data and conducted multiple statistical analyses using R</li>
+<li> Findings and implication written in a paper and submitted for publicatio</li>
+</ul>
+<strong>Kirkman Packing Design, </strong>Nebraska Wesleyan University, October 2016 &ndash; May 2017
+<ul>
+<li>Studied and developed code to solve an original packing design problem</li>
+<li>Implemented optimization techniques/programming using Python</li>
+</ul>
+<br>
+
+<h4><strong><u>Programming Skills</u></strong><strong>:</strong></h4>
+<ul>
+<li>R, Python (pandas, statmodels, sklearn, and numpy)</li>
+<li>Git, SQL, and Microsoft Office (including: Word, Excel, Access, PowerPoint and Outlook) </li>
+<li>HTML, CSS, Javascript</li>
+<li>SAP Predictive Analytics</li>
+</ul>
+<br>
+
+<h4><strong><u>Skills</u></strong><strong>:</strong></h4>
+<ul>
+<li>Data cleaning, manipulation, and analysis</li>
+<li>Predictive model building and evaluati</li>
+<li>Mathematics and statistics educat</li>
+</ul>
+<br>
+
+<h4><strong><u>Activities</u></strong><strong>:</strong></h4>
+<p><strong>Cross Country and Track and Field,</strong> Nebraska Wesleyan University, August 2014 &ndash; May 2018</p>
+<ul>
+<li>Provided leadership and organized workouts, meetings and devotionals</li>
+<li>Cross Country and Track and Field USTFCCCA All-Academic Team Honors</li>
+<li>NCAA Division III Outdoor Track National Qualifier in 10,000 meters</li>
+</ul>

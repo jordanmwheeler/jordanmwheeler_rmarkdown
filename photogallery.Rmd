@@ -1,0 +1,71 @@
+---
+title: "Photo Gallery"
+---
+
+<link href="PhotoGallery/css/lightbox.css" rel="stylesheet">
+
+<style>
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
+</style>
+
+<hr>
+
+<h3>TransNebraska Prep</h3>
+<!-- MAIN (Center website) -->
+<div class="main">
+<!-- Portfolio Gallery Grid -->
+<div class="row">
+<div class="column">
+<div class="content">
+<a href="Photos/prep_30miles.jpg" data-lightbox="photogal" data-title="30 Mile Run in Prep for the TransNebraska Run"><img class="center" src="Photos/prep_30miles.jpg" alt="30 Mile Run"></a>
+<h4 align="center">30 Mile Run in Prep for the TransNebraska Run</h4>
+</div>
+</div>
+<div class="column">
+<div class="content">
+<a href="Photos/prep_36miles.jpg" data-lightbox="photogal" data-title="36 Mile Run in Prep for the TransNebraska Run."><img class="center" src="Photos/prep_36miles.jpg" alt="36 Mile Run"></a>
+<h4 align="center">36 Mile Run in Prep for the TransNebraska Run.</h4>
+</div>
+</div>
+</div>
+
+<hr>
+
+<h3>Pre TransNebraska Run (One Day Out)</h3>
+<div class="row">
+<div class="column">
+<div class="content">
+<a href="Photos/snacks.jpg" data-lightbox="photogal" data-title="Snacks that will be eaten throughout the week."><img class="center" src="Photos/snacks.jpg" alt="snacks"></a>
+<h4 align="center">Snacks that will be eaten throughout the week.</h4>
+</div>
+</div>
+<div class="column">
+<div class="content">
+<a href="Photos/camper_inside.jpg" data-lightbox="photogal" data-title="An inside look of the camper while setting up this blog and photo gallery."><img class="center" src="Photos/camper_inside.jpg" alt="Camper Inside"></a>
+<h4 align="center">An inside look of the camper while setting up this blog and photo gallery.</h4>
+</div>
+</div>
+<div class="column">
+<div class="content">
+<a href="Photos/camper_dad.jpg" data-lightbox="photogal" data-title="Outside look of the camper featuring my dad."><img class="center" src="Photos/camper_dad.jpg" alt="camper dad"></a>
+<h4 align="center">Outside look of the camper featuring my dad.</h4>
+</div>
+</div>
+<div class="column">
+<div class="content">
+<a href="Photos/prerun_dinner.jpg" data-lightbox="photogal" data-title="Pineapple Brat Patties for dinner before the first day!"><img class="center" src="Photos/prerun_dinner.jpg" alt="prerun dinner"></a>
+<h4 align="center">Pineapple Brat Patties for dinner before the first day!</h4>
+</div>
+</div>
+</div>
+
+<hr>
+
+<!-- END MAIN -->
+</div>
+
+<script src="PhotoGallery/js/lightbox-plus-jquery.js"></script>

@@ -1,0 +1,174 @@
+---
+title: ""
+author: "Jordan Wheeler"
+description: "Jordan Wheeler's Curriculum Vitae"
+---
+
+<meta name="author" content="Jordan Wheeler">
+<meta name="description" content="Jordan Wheeler's Curriculum Vitae">
+
+
+<style>
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+
+<a href="Resumes/JordanWheeler_CV.pdf" target="_blank"><h1>Jordan Wheeler's Curriculum Vitae:</h1></a>
+
+<div id="textbox">
+<h4 class="alignleft">Curriculum Vitae</h4>
+<h4 class="alignright">April 25, 2019</h4>
+</div>
+
+<br/>
+<hr style="border-color: #666666;">
+
+<center>
+<h2>Jordan Wheeler</h2>
+<h4>University of Nebraska, Omaha, Ne.</h4>
+<h4>phone: (402) 707-9177, email: jmwheeler@uga.edu</h4>
+</center>
+<hr/>
+
+<!----------->
+<h4><strong><u>Academic Background</u></strong></h4>
+<ul>
+<li><p>Doctorate of Philosophy in Ed. Psychology: University of Georgia (May 2023)</p>
+<ul>
+<li><p>Research, Evaluation, Measurement, Statistics Concentration</p></li>
+<li><p></p></li>
+</ul></li>
+<li><p>Master of Science in Mathematics: University of Nebraska at Omaha (May 2019)</p>
+<ul>
+<li><p>Statistics Concentration</p></li>
+<li><p>3.82 overall GPA</p></li>
+</ul></li>
+<li><p>Bachelor of Science in Mathematics: Nebraska Wesleyan University (May 2017)</p>
+<ul>
+<li><p>3.54 overall GPA, 3.62 major GPA</p></li>
+</ul></li>
+</ul>
+<br/>
+
+<!----------->
+<h4><strong><u>Research Experience</u></strong></h4>
+<ul>
+<li><p>University of Nebraska at Omaha Mathematics Department, Advisor: Dr. Mahbubul Majumder</p>
+<ul>
+<li><p>Analysis of gene expression between tumor and normal tissue cells (Fall 2018)</p>
+<ul>
+<li><p>Results are being written in a paper ”A Pan-Cancer Analysis of Gene Expression Data Across 32 Tissues” with intent of publication</p></li>
+</ul></li>
+</ul></li>
+<li><p>Nebraska Wesleyan Health and Human Performance Department, Mentor: Dr. Ted Bulling</p>
+<ul>
+<li><p>Analysis of Banked Track to Flat Track Conversions (Spring 2018 - Fall 2018)</p>
+<ul>
+<li><p>Scraped web data to conduct Shapiro-Wilk Normality check, Paired Sample t-Test, and Bayesian MCMC Simulations to compared indoor track conversions</p></li>
+<li><p>Findings and implications written in a paper and submitted for publication to the <em>International Journal of Performance Analysis in Sport</em>: "Analysis of NCAA Division III 200/400 Indoor Track Conversions"</p></li>
+</ul></li>
+</ul></li>
+<li><p>University of Nebraska at Omaha ISQA Department, Mentor: Dr. Christian Haas</p>
+<ul>
+<li><p>Independent Research in Game Theory (Summer 2018)</p>
+<ul>
+<li><p>Paper written with a comprehensive study of non-cooperative games</p></li>
+</ul></li>
+</ul></li>
+<li><p>Nebraska Wesleyan Mathematics Department, Mentor: Dr. Austin Mohr</p>
+<ul>
+<li><p>Graph Theory: Rework of Kirchoff's Matrix Tree Theorem (Spring 2017)</p>
+<ul>
+<li><p>Oral presentation at Doane University's Mathematics Conference and at Nebraska Wesleyan's Research Symposium</p></li>
+<li><p>Paper written in partial fulfillment of the Bachelor of Science degree</p></li>
+</ul></li>
+<li><p>Combinatorics: Kirkman Packing Designs (Spring 2017)</p>
+<ul>
+<li><p>Implemented simulation and optimization techniques with <em>Python</em><p></li>
+<li><p>Poster Presentation at Nebraska Wesleyan's Research Symposium</p></li>
+</ul></li>
+<li><p>Topology: Banach Mazur Topological Game (Spring 2016)</p>
+<ul>
+<li><p>Composed proofs for strategies within different topological orders for the Banach-Mazur game</p></li>
+<li><p>Beamer presentation at Nebraska Wesleyan’s Research Symposium</p></li>
+</ul></li>
+<li><p>Topology: Countable and Uncountable Spaces (Spring 2016)</p>
+<ul>
+<li><p>Composed proofs to prove countability and uncountability for different topological spaces</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<br/>
+
+<!----------->
+<h4><strong><u>Work Experience</u></strong></h4>
+<ul>
+<li><p>Research Assistant: UNO Mathematics Dept. (November 2018 - Present)</p></li>
+<ul>
+<li><p>Working on visualization and text analysis on hateful speech</p></li>
+<li><p>Working on protein analysis of HIV and non-HIV infected macrophages (white blood cell)</p></li>
+<li><p>Weekly meetings to discuss current progress on research</p></li>
+</ul>
+<li><p>CATCH Intelligence: Data Science Internship (January 2018 - Present)</p></li>
+<ul>
+<li><p>25 - 35 Hours per week</p></li>
+<li><p>Presented a webinar of the slide deck to potential clients</p></li>
+<li><p>Created RShiny applications for different uses</p></li>
+<li><p>Created multiple presentations to sell predictive and prescriptive services to clients</p></li>
+</ul>
+<li><p>Volunteer Cross Country Coach: Omaha North Magnet High School (June 2018 - October 2018)</p></li>
+<ul>
+<li><p>Worked with and provided workouts to high school student athletes</p></li>
+<li><p>Worked with a team of coaches</p></li>
+</ul>
+<li><p>Lincoln Public Schools: Mathematics Mentor (August 2017 - December 2017)</p></li>
+<ul>
+<li><p>Worked 20 Hours per week</p></li>
+<li><p>Mentored and taught highly gifted students in Mathematics</p></li>
+<li><p>Created lesson plans and used multiple strategies to teach required topics</p></li>
+<li><p>Accountable for writing reports of students' progress for administration</p></li>
+</ul>
+</ul>
+<br/>
+
+<!----------->
+<h4><strong><u>School Involvement</u></strong></h4>
+<ul>
+<li><p>Nebraska Wesleyan University</p>
+<ul>
+<li><p>Student Athlete (Fall 2014 - Spring 2018)</p></li>
+<ul>
+<li><p>Cross Country and Track</p></li>
+<li><p>15 - 20 practice hours per week</p></li>
+</ul>
+<li><p>Mathematics Club (Spring 2016 - Spring 2017)</p></li>
+<ul>
+<li><p>Weekly meetings to discuss research</p></li>
+</ul>
+</ul></li>
+</ul>
+<br/>
+
+<!----------->
+<h4><strong><u>Honors and Awards</u></strong></h4>
+<ul>
+<li><p>Nebraska Wesleyan 3.75+ Academic Honor List</p></li>
+<li><p>10 x Academic All-Conference Team for Cross Country/Track and Field</p></li>
+<li><p>9 x USTFCCCA All Academic Scholar Athlete</p>
+<ul>
+<li><p>3.25+ GPA and one of the top performers in the nation</p></li>
+</ul></li>
+<li><p>NCAA National Qualifier for Outdoor Track Championships in the 10,000 meters</p>
+<ul>
+<li><p>Top 20 runners in the country per event qualify</p></li>
+</ul></li>
+<li><p>National Qualifier for the NCAA Cross Country Championships</p></li>
+<li><p>GPAC Cross Country Runner of the Year</p></li>
+<li><p>2 x Conference Champion</p></li>
+</ul>
+
+<hr style="border-color: #666666;">

@@ -1,0 +1,131 @@
+---
+title: ""
+author: "Jordan Wheeler"
+description: "Jordan Wheeler's Course Study"
+---
+
+<meta name="author" content="Jordan Wheeler">
+<meta name="description" content="Jordan Wheeler's Course Study">
+
+<style>
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+
+<a href="Resumes/JordanWheeler_CourseLists.pdf" target="_blank"><h1>Jordan Wheeler's Courses of Study:</h1></a>
+
+<div id="textbox">
+<h4 class="alignleft">Courses of Study</h4>
+<h4 class="alignright">December 20, 2018</h4>
+</div>
+
+<br/>
+<hr style="border-color: #666666;">
+
+<center>
+<h2>Jordan Wheeler</h2>
+<h4>University of Nebraska, Omaha, Ne.</h4>
+<h4>phone: (402) 707-9177, email: jmwheeler@unomaha.edu</h4>
+</center>
+<hr/>
+
+<!----------->
+<h4><strong><u>Master of Science: Mathematics (University of Nebraska-Omaha)</u></strong></h4>
+<ul>
+<li><h5>Fall 2017</h5></li>
+<ul>
+<li><p>MATH 8756: Probability & Statistics II | B</p></li>
+<li><p>STAT 8436: Linear Models | A</p></li>
+</ul>
+<li><h5>Spring 2018</h5></li>
+<ul>
+<li><p>ECON 8320: Tools for Data Analysis | A</p></li>
+<li><p>ISQA 8156: Advanced Statistical Methods for IS&T | A</p></li>
+<li><p>ISQA 8050: Data Organization and Storage | A</p></li>
+</ul>
+<li><h5>Summer 2018</h5></li>
+<ul>
+<li><p>ISQA 8900: Independent Research in MIS (Game Theory) | A-</p></li>
+</ul>
+<li><h5>Fall 2018</h5></li>
+<ul>
+<li><p>STAT 8700: Bayesian Statistics | A-</p></li>
+<li><p>STAT 8416: Introduction to Data Science | A</p></li>
+<li><p>STAT 8990: M.Sc. Project | P</p></li>
+</ul>
+<li><h5>Spring 2019</h5></li>
+<ul>
+<li><p>STAT 8426: Data Visualization | A</p></li>
+<li><p>STAT 8456: Machine Learning and Data Mining | A</p></li>
+<li><p>MATH 8710: Design of Experiments | A</p></li>
+</ul>
+</ul>
+<br>
+
+<!----------->
+<h4><strong><u>Master of Education: Curriculum & Instruction (Nebraska Wesleyan University)^[Completed a year of this program to recieve knowledge and learn research methods/design within the Education field]</u></strong></h4>
+
+<ul>
+<li><h5>Fall 2017</h5></li>
+<ul>
+<li><p>EDUC 5130: Reflective Practitioner | A-</p></li>
+<li><p>EDUC 5150: Literacy Instruction in a Digital Age | A-</p></li>
+</ul>
+<li><h5>Spring 2018</h5></li>
+<ul>
+<li><p>EDUC 5140: Instructional Practice and Curriculum Design | A</p></li>
+<li><p>EDUC 5160: Content Area Strategies | A</p></li>
+</ul>
+</ul>
+<br>
+
+<!----------->
+<h4><strong><u>Bachelor of Science: Mathematics (Nebraska Wesleyan University)^[This list only includes relevant courses (i.e. Mathematics, Statistics, or Education in nature)]</u></strong></h4>
+
+<ul>
+<li><h5>Prior (Dual Enrollment)</h5></li>
+<ul>
+<li><p>MATH 1300: Statistics | A</p></li>
+<li><p>MATH 1600: Calculus I | A</p></li>
+<li><p>MATH 1610: Calculus II | A</p></li>
+</ul>
+<li><h5>Fall 2014</h5></li>
+<ul>
+<li><p>MATH 2600: Calculus III | A</p></li>
+</ul>
+<li><h5>Spring 2015</h5></li>
+<ul>
+<li><p>MATH 2200: Introduction to Higher Mathematics | B</p></li>
+</ul>
+<li><h5>Fall 2015</h5></li>
+<ul>
+<li><p>MATH 3500: Geometry | A</p></li>
+<li><p>MATH 3750: Numerical Analysis | B</p></li>
+<li><p>EDUC 1010: Introduction to Education in U.S. | A</p></li>
+<li><p>EDUC 1750: Field Experience | A</p></li>
+</ul>
+<li><h5>Spring 2016</h5></li>
+<ul>
+<li><p>MATH 3200: Linear Algebra | A</p></li>
+<li><p>MATH 4300: Real Analysis | B+</p></li>
+<li><p>MATH 4800: Independent Research (Topology) | A</p></li>
+</ul>
+<li><h5>Fall 2016</h5></li>
+<ul>
+<li><p>MATH 3300: Mathematical Statistics I | A</p></li>
+<li><p>MATH 3600: Mathematical Problem Solving | A</p></li>
+<li><p>MATH 4200: Abstract Algebra I | C</p></li>
+<li><p>EDUC 2850: Education in a Pluralistc Society | A</p></li>
+</ul>
+<li><h5>Spring 2017</h5></li>
+<ul>
+<li><p>MATH 4980: Mathematics Seminar (Graph Theory) | A-</p></li>
+<li><p>CMPSC 4960: Special Project (Combinatorics) | A</p></li>
+</ul>
+</ul>
+
+<hr style="border-color: #666666;">

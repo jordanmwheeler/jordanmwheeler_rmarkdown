@@ -1,0 +1,18 @@
+---
+title: ""
+author: "Jordan Wheeler"
+description: "Jordan Wheeler's Shiny Applications"
+---
+
+<meta name="author" content="Jordan Wheeler">
+<meta name="description" content="Jordan Wheeler's Shiny Applications">
+
+<h1>Shiny Applications</h1>
+<hr style="border-color: #666666;">
+<br/>
+
+<p style="float: left; font-size: 12pt; text-align: center; width: 45%; margin-right: 5%; margin-bottom: 0.5em;">Linear Model Report:<br/><br/><a href = "LMDiamondReportApp.html"><img src="Photos/ShinyAppsPhotos/LMReportPhoto.jpg" alt="Linear Model on Diamonds Report Application"></a></p>
+
+<p style="float: left; font-size: 12pt; text-align: center; width: 45%; margin-left: 5%; margin-bottom: 0.5em;">Running and Pace Calculator:<br/><br/><a href = "PaceCalculatorApp.html"><img src="Photos/ShinyAppsPhotos/PaceCalcPhoto.jpg" alt="Pace Calculator Application"></a></p>
+
+<p style="clear: both;">
